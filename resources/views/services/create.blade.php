@@ -7,7 +7,7 @@
             <h2>Add New Service</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('services.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('addservices.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
    
-<form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('addservices.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
   
      <div class="row">

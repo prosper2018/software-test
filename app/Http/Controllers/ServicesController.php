@@ -17,9 +17,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $service = Services::latest()->paginate(5);
+        $addservice = Services::latest()->paginate(5);
   
-        return view('services.index',compact('service'))
+        return view('services.index',compact('addservice'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -62,7 +62,7 @@ class ServicesController extends Controller
 
             $data->save();
    
-        return redirect()->route('services.index')
+        return redirect()->route('addservices.index')
                         ->with('success','Service created successfully.');
             } catch (Exception $e) {
                         //Write your error message here
@@ -77,9 +77,9 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show(Services $service)
+    public function show(Services $addservice)
     {
-        return view('services.show',compact('service'));
+        return view('services.show',compact('addservice'));
     }
 
     /**
@@ -88,9 +88,9 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function edit(Services $service)
+    public function edit(Services $addservice)
     {
-        return view('services.edit',compact('service'));
+        return view('services.edit',compact('addservice'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Services $service)
+    public function update(Request $request, Services $addservice)
     {
         $request->validate([
             'name' => 'required',
@@ -108,9 +108,9 @@ class ServicesController extends Controller
             'description' => 'required',
         ]);
   
-        $service->update($request->all());
+        $addservice->update($request->all());
   
-        return redirect()->route('services.index')
+        return redirect()->route('addservices.index')
                         ->with('success','Services updated successfully');
   
     }
@@ -121,11 +121,11 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Services $service)
+    public function destroy(Services $addservice)
     {
-        $service->delete();
+        $addservice->delete();
   
-        return redirect()->route('services.index')
+        return redirect()->route('addservices.index')
                         ->with('success','Services deleted successfully');
     }
 }

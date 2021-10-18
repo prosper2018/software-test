@@ -6,29 +6,29 @@
                 <h2> Show Services</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('services.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('addservices.index') }}"> Back</a>
             </div>
         </div>
     </div>
    
     <div class="row">
-        <img src="../{{ $service->photo }}" alt="Service photo" width="100" height="80">
+        <img src="../{{ $addservice->photo }}" alt="Service photo" width="100" height="80">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                {{ $service->name }}
+                {{ $addservice->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Price:</strong>
-                {{ $service->price }}
+                {{ $addservice->price }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $service->description }}
+                {{ $addservice->description }}
             </div>
         </div>
     </div>

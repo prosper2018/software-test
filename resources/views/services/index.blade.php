@@ -8,7 +8,7 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="/admin"> Home</a>
-                <a class="btn btn-success" href="{{ route('services.create') }}"> Create New Service</a>
+                <a class="btn btn-success" href="{{ route('addservices.create') }}"> Create New Service</a>
             </div>
         </div>
     </div>
@@ -27,18 +27,18 @@
             <th>Description</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($service as $services)
+        @foreach ($addservice as $services)
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $services->name }}</td>
             <td>{{ $services->price }}</td>
             <td>{{ $services->description }}</td>
             <td>
-                <form action="{{ route('services.destroy',$services->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('addservices.destroy',$services->id) }}" method="POST" enctype="multipart/form-data">
    
-                    <a class="btn btn-info" href="{{ route('services.show',$services->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('addservices.show',$services->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('services.edit',$services->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('addservices.edit',$services->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
@@ -50,6 +50,6 @@
         @endforeach
     </table>
   
-    {!! $service->links() !!}
+    {!! $addservice->links() !!}
       
 @endsection

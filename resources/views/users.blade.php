@@ -8,8 +8,9 @@
             <div class="top-right links">
                 @auth
                     <a href="{{ url('/user') }}">Home</a>
-                    {{-- <a href="{{ url('/users') }}">Users</a>
-                    <a href="{{ url('/services') }}">Services</a> --}}
+                    {{-- <a href="{{ url('/users') }}">Users</a>--}}
+                    <a href="{{ url('/services') }}">Services</a> 
+                    <a href="{{ url('/order') }}">My Orders</a> 
                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

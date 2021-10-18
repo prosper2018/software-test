@@ -9,7 +9,7 @@
                 @auth
                     <a href="{{ url('/admin') }}">Home</a>
                     <a href="{{ url('/users') }}">Users</a>
-                    <a href="{{ url('/services') }}">Services</a>
+                    <a href="{{ url('/addservices') }}">Services</a>
                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
