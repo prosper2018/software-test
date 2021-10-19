@@ -10,4 +10,9 @@ class OrderItem extends Model
     protected $fillable = [
         'user_id', 'service_id', 'price', 'quantity', 'status',
     ];
+
+    public function service()
+    {
+        return $this->hasOne(Services::class, 'id', 'service_id');
+    }
 }

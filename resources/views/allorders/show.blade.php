@@ -1,4 +1,4 @@
-@extends('myorder.layout')
+@extends('allorders.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,47 +6,47 @@
                 <h2>My Order</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('order.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('orders.index') }}"> Back</a>
             </div>
         </div>
     </div>
    
     <div class="row">
-        <img src="../{{ $order->service->photo }}" alt="Service photo" width="250" height="300">
+        <img src="../{{ $orders->service->photo }}" alt="Service photo" width="250" height="300">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                {{ $order->service->name }}
+                {{ $orders->service->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $order->service->description }}
+                {{ $orders->service->description }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Price:</strong>
-                {{ $order->price }}
+                {{ $orders->price }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Quantity:</strong>
-                {{ $order->quantity }}
+                {{ $orders->quantity }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Total:</strong>
-                {{ $order->price * $order->quantity }}
+                {{ $orders->price * $orders->quantity }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Status:</strong>
-                {{ $order->status }}
+                {{ $orders->status }}
             </div>
         </div>
     </div>

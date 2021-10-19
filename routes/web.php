@@ -41,12 +41,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', AddUserController::class)->middleware('admin');
     Route::resource('addservices', ServicesController::class)->middleware('admin');
     Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
-    Route::resource('orders', OrdersController::class)->middleware('admin');
+    Route::resource('orders', AllOrdersController::class)->middleware('admin');
 });
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/user', 'UsersController@index')->name('user')->middleware('user');
-    Route::resource('orders', OrdersController::class)->middleware('user');
+    //Route::resource('orders', OrdersController::class)->middleware('user');
     Route::patch('update-cart', 'OrderController@update')->name('update.cart');
 
     Route::delete('remove-from-cart', 'OrderController@remove')->name('remove.from.cart');

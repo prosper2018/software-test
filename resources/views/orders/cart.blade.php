@@ -61,7 +61,7 @@
                 
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}" class="form-control" />
-                    <input type="hidden" name="service_id[]" value="{{ $details['name'] }}" class="form-control" />
+                    <input type="hidden" name="service_id[]" value="{{ $details['id'] }}" class="form-control" />
                     <input type="hidden" name="price[]" value="{{ $details['price'] * $details['quantity'] }}" class="form-control" />
                     <input type="hidden" name="quantity[]" value="{{ $details['quantity'] }}" class="form-control" />
                 {{-- <a class="btn btn-success" href="{{ route('order.store') }}">Checkout</a> --}}

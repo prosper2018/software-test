@@ -10,7 +10,7 @@ use App\Traits\ImageUpload;
 
 use App\OrderItem;
 
-use App\User;
+use App\Services;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -28,7 +28,7 @@ class OrdersController extends Controller
     {
         $id = auth()->user()->id;
         $order = OrderItem::where('user_id', $id)->latest()->paginate(5);
-  
+        
         return view('myorder.index',compact('order'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -66,7 +66,7 @@ class OrdersController extends Controller
           foreach($cart as $key => $data) {
               OrderItem::create([
                   'user_id' => $user_id,
-                  'service_id' => $data['name'],
+                  'service_id' => $data['id'],
                   'price' => $data['price'],
                   'quantity' => $data['quantity'],
                   'status' => 'pending'
@@ -108,9 +108,22 @@ class OrdersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, OrderItem $order)
     {
-        //
+        $request->validate([
+            'user_id'=>'required',
+            'service_id'=>'required',
+            'price'=>'required',
+            'quantity'=>'required',
+            'status'=>'required'
+        ]);
+
+        // $data = new OrderItem();
+        // $data->status = $request->status;
+        $order->update($request->all());
+
+        return redirect()->route('order.index')
+                        ->with('success','Order Cancelled successfully');
     }
 
     /**
@@ -119,8 +132,8 @@ class OrdersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(OrderItem $user)
     {
-        //
+
     }
 }
