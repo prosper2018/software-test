@@ -4,31 +4,7 @@
 @section('content')
 <div class="container">
     <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/user') }}">Home</a>
-                    {{-- <a href="{{ url('/users') }}">Users</a>--}}
-                    <a href="{{ url('/services') }}">Services</a> 
-                    <a href="{{ url('/order') }}">My Orders</a> 
-                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
+        
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

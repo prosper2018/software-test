@@ -92,4 +92,12 @@ class AllOrdersController extends Controller
         return redirect()->route('orders.index')
                         ->with('success','Services deleted successfully');
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        //dd($order->pizza->medium_pizza_price);
+        $order = OrderItem::find($id);
+        OrderItem::where('id', $id)->update(['status' => $request->status]);
+        return back();
+    }
 }

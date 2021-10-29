@@ -37,29 +37,31 @@ Route::resource('customers', CustomersController::class);
 Route::resource('order', OrdersController::class);
 
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('users', AddUserController::class)->middleware('admin');
-    Route::resource('addservices', ServicesController::class)->middleware('admin');
-    Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
-    Route::resource('orders', AllOrdersController::class)->middleware('admin');
+Route::group(['prefix'=>'admin','middleware' => ['auth', 'admin']], function() {
+    Route::resource('users', AddUserController::class);
+    Route::resource('addservices', ServicesController::class);
+    Route::get('/admin', 'AdminController@index')->name('admin');
+    Route::resource('orders', AllOrdersController::class);
 
     Route::patch('update-cart', 'OrderController@update')->name('update.cart');
 
     Route::delete('remove-from-cart', 'OrderController@remove')->name('remove.from.cart');
 
-    Route::get('service', 'OrderController@index')->middleware('admin');
-    Route::get('cart', 'OrderController@cart')->name('cart')->middleware('admin');
+    Route::get('service', 'OrderController@index');
+    Route::get('cart', 'OrderController@cart')->name('cart');
     Route::get('add-to-cart/{id}', 'OrderController@addToCart')->name('add.to.cart');
+
+    Route::post('/orders/{id}/status', 'AllOrdersController@changeStatus')->name('orders.status');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('/user', 'UsersController@index')->name('user')->middleware('user');
-    //Route::resource('orders', OrdersController::class)->middleware('user');
+Route::group(['prefix'=>'user','middleware' => ['auth', 'user']], function() {
+    Route::get('/user', 'UsersController@index')->name('user');
+    
     Route::patch('update-cart', 'OrderController@update')->name('update.cart');
 
     Route::delete('remove-from-cart', 'OrderController@remove')->name('remove.from.cart');
 
-    Route::get('services', 'OrderController@index')->middleware('user');
-    Route::get('cart', 'OrderController@cart')->name('cart')->middleware('user');
+    Route::get('services', 'OrderController@index')->name('services');
+    Route::get('cart', 'OrderController@cart')->name('cart');
     Route::get('add-to-cart/{id}', 'OrderController@addToCart')->name('add.to.cart');
 });

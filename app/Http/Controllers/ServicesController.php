@@ -54,7 +54,7 @@ class ServicesController extends Controller
         $data->photo = $request->photo;
         if($data->photo){
            try {
-            $filePath = $this->UserImageUpload($data->photo); //Passing $data->image as parameter to our created method
+            $filePath = $request->photo->store('public/images'); //Passing $data->image as parameter to our created method
             $data->name = $request->name;
             $data->price = $request->price;
             $data->photo = $filePath;
@@ -88,8 +88,9 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function edit(Services $addservice)
+    public function edit($id)
     {
+        $addservice = Services::find($id);
         return view('services.edit',compact('addservice'));
     }
 
@@ -100,15 +101,28 @@ class ServicesController extends Controller
      * @param  \App\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Services $addservice)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
         ]);
-  
-        $addservice->update($request->all());
+        //dd($request->all());
+        $data = Services::find($id);
+        if($request->has('photo')){
+            $path = $request->photo->store('public/images');
+        }else{
+            $path = $data->photo;
+        }
+        //$addservice->update($request->all());
+        
+            $data->name = $request->name;
+            $data->price = $request->price;
+            $data->photo = $path;
+            $data->description = $request->description;
+
+            $data->save();
   
         return redirect()->route('addservices.index')
                         ->with('success','Services updated successfully');

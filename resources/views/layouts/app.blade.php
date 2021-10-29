@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config( 'raadaa.com') }}
+                    RAADAA
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -59,6 +59,34 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if (auth()->user()->role == 'user')
+                                        <a class="dropdown-item" href="{{ route('user') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('services') }}">
+                                            {{ __('Services') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('/order') }}">
+                                            {{ __('My Orders') }}
+                                        </a>
+                                    @endif
+                                    @if (auth()->user()->role == 'admin')
+                                    <a class="dropdown-item" href="{{ url('/admin/admin') }}">
+                                        {{ __('Home') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/admin/users') }}">
+                                        {{ __('Users') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/admin/service') }}">
+                                        {{ __('Services') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/admin/addservices') }}">
+                                        {{ __('Manage Services') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/admin/orders') }}">
+                                        {{ __('Manage Orders') }}
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

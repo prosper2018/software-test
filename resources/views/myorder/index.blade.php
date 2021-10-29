@@ -1,23 +1,28 @@
-@extends('myorder.layout')
- 
+@extends('layouts.app')
+
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>My Orders</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('user') }}">Home</a>
-            </div>
-        </div>
-    </div>
-   
-    @if ($message = Session::get('success'))
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
+
+                <div class="card-body">
+                    <div class="col-lg-12 margin-tb">
+                        <div class="pull-left">
+                            <h2>My Orders</h2>
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-success" href="{{ route('user') }}">Home</a>
+                        </div>
+                    </div>
+
+                    @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
-   
+    <div class="card-body">
     <table class="table table-bordered">
         <tr>
             <th>No</th>
@@ -61,7 +66,22 @@
             <td merge="col-7"></td>
         </tr> --}}
     </table>
+    </div>
   
     {!! $order->links() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+ 
+
+@section('content')
+    <div class="row">
+        
+    </div>
+   
+    
       
 @endsection

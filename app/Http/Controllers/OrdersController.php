@@ -108,7 +108,7 @@ class OrdersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderItem $order)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'user_id'=>'required',
@@ -118,12 +118,20 @@ class OrdersController extends Controller
             'status'=>'required'
         ]);
 
-        // $data = new OrderItem();
-        // $data->status = $request->status;
-        $order->update($request->all());
+        $order = OrderItem::find($id);
+        if($order->status != 'completed'){
+            $order->update($request->all());
 
         return redirect()->route('order.index')
                         ->with('success','Order Cancelled successfully');
+        }else{
+            return redirect()->route('order.index')
+                        ->with('success','You cannot cancel a completed order!!!');
+        }
+        // $data = new OrderItem();
+        // $data->status = $request->status;
+        
+        
     }
 
     /**

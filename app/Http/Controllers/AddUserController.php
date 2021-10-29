@@ -64,7 +64,7 @@ class AddUserController extends Controller
         $datas->photo = $request->photo;
         if($datas->photo){
            try {
-            $filePath = $this->UserImageUpload($datas->photo); //Passing $data->image as parameter to our created method
+            $filePath = $request->photo->store('public/images'); //Passing $data->image as parameter to our created method
             $data->name = $request->name;
             $data->email = $request->email;
             $data->role = 'user';
@@ -104,8 +104,9 @@ class AddUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $user)
+    public function edit($id)
     {
+        $user = Profile::find($id);
         return view('users.edit',compact('user'));
     }
 
@@ -116,15 +117,33 @@ class AddUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, Profile $profile)
+    public function update(Request $request, $id)
     {
+        //dd($request->all());
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
         ]);
-  
-        $user->update($request->all());
-        $profile->update($request->all());
+        
+        $user = User::find($id);
+        $profile = Profile::find($id);
+        if($request->has('photo')){
+            $path = $request->photo->store('public/images');
+        }else{
+            $path = $profile->photo;
+        }
+        // $path = $request->photo->store('public/images');
+        // $user->update($request->all());
+        // $profile->update($request->all());
+
+        $profile->name = $request->name;
+        $profile->phone = $request->phone;
+        $profile->photo = $path;
+        $user->name = $request->name;
+
+        //dd($pizza);
+        $profile->save();
+        $user->save();
   
         return redirect()->route('users.index')
                         ->with('success','User updated successfully');
