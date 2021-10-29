@@ -42,6 +42,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('addservices', ServicesController::class)->middleware('admin');
     Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
     Route::resource('orders', AllOrdersController::class)->middleware('admin');
+
+    Route::patch('update-cart', 'OrderController@update')->name('update.cart');
+
+    Route::delete('remove-from-cart', 'OrderController@remove')->name('remove.from.cart');
+
+    Route::get('service', 'OrderController@index')->middleware('admin');
+    Route::get('cart', 'OrderController@cart')->name('cart')->middleware('admin');
+    Route::get('add-to-cart/{id}', 'OrderController@addToCart')->name('add.to.cart');
 });
 
 Route::group(['middleware' => ['auth']], function() {

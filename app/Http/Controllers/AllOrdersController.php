@@ -48,10 +48,12 @@ class AllOrdersController extends Controller
      * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderItem $orders)
+    public function show(OrderItem $orders, $id)
     {
         //dd($orders);
-        //return view('allorders.show',compact('orders'));
+        $orders = OrderItem::where('id', $id)->first();
+
+        return view('allorders.show',compact('orders'));
     }
 
     /**
@@ -83,8 +85,11 @@ class AllOrdersController extends Controller
      * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderItem $orderItem)
+    public function destroy(OrderItem $orders, $id)
     {
-        //
+        $orders->delete();
+  
+        return redirect()->route('orders.index')
+                        ->with('success','Services deleted successfully');
     }
 }
